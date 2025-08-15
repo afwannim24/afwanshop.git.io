@@ -57,36 +57,43 @@
             opacity: 1;
         }
     </style>
+    <!-- Google Sign-In -->
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
 </head>
 <body class="antialiased">
 
     <!-- Header / Navbar -->
     <header id="header" class="fixed top-0 left-0 right-0 z-50 bg-black bg-opacity-50 backdrop-blur-md shadow-lg">
         <div class="container mx-auto px-6 py-4 flex justify-between items-center">
-            <a href="#home" class="text-2xl font-bold text-white tracking-wider">New Production</a>
+            <a href="index.html" class="text-2xl font-bold text-white tracking-wider">New Project</a>
             <nav class="hidden md:flex items-center space-x-8">
                 <a href="#home" class="text-gray-300 hover:text-white">Home</a>
                 <a href="#catalog" class="text-gray-300 hover:text-white">Katalog</a>
                 <a href="#contact" class="text-gray-300 hover:text-white">Kontak</a>
-                <button id="login-button" class="flex items-center gap-2 bg-white text-black px-4 py-2 font-semibold rounded-md hover:bg-gray-200">
-                    <i class="fa-brands fa-google"></i>
-                    <span>Login</span>
-                </button>
+                <a href="keranjang.html" class="text-white text-xl hover:text-gray-300"><i class="fas fa-shopping-cart"></i></a>
+                <!-- Tombol Login Google Desktop -->
+                <div id="g_id_onload"
+                     data-client_id="106552179953-cq6lcdoc38em1idjmgj94nbl2i10dlgd.apps.googleusercontent.com"
+                     data-callback="handleCredentialResponse"
+                     data-use_fedcm_for_prompt="false">
+                </div>
+                <div class="g_id_signin" data-type="standard"></div>
             </nav>
-            <button id="mobile-menu-button" class="md:hidden text-white focus:outline-none">
-                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
-            </button>
+            <div class="md:hidden flex items-center gap-4">
+                <a href="keranjang.html" class="text-white text-xl"><i class="fas fa-shopping-cart"></i></a>
+                <button id="mobile-menu-button" class="text-white focus:outline-none">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+                </button>
+            </div>
         </div>
         <!-- Mobile Menu -->
         <div id="mobile-menu" class="hidden md:hidden">
             <a href="#home" class="block py-2 px-6 text-sm text-gray-300 hover:bg-gray-800">Home</a>
             <a href="#catalog" class="block py-2 px-6 text-sm text-gray-300 hover:bg-gray-800">Katalog</a>
             <a href="#contact" class="block py-2 px-6 text-sm text-gray-300 hover:bg-gray-800">Kontak</a>
-            <div class="p-4">
-                <button id="mobile-login-button" class="w-full flex items-center justify-center gap-2 bg-white text-black px-4 py-2 font-semibold rounded-md hover:bg-gray-200">
-                    <i class="fa-brands fa-google"></i>
-                    <span>Login dengan Google</span>
-                </button>
+            <div class="p-4 flex justify-center">
+                 <!-- Tombol Login Google Mobile -->
+                <div class="g_id_signin" data-type="standard" data-size="large"></div>
             </div>
         </div>
     </header>
@@ -95,8 +102,8 @@
         <!-- Hero Section -->
         <section id="home" class="hero-section h-screen bg-cover bg-center flex items-center justify-center text-center text-white" style="background-image: url('https://images.unsplash.com/photo-1483985988355-763728e1935b?q=80&w=2070&auto=format&fit=crop');">
             <div class="bg-black bg-opacity-60 p-8 md:p-12 rounded-lg">
-                <h1 class="text-5xl md:text-7xl font-extrabold tracking-tight uppercase">Z shop</h1>
-                <p class="mt-4 text-lg md:text-2xl font-light text-gray-300">FIND YOUR STYLE WITH US</p>
+                <h1 class="text-5xl md:text-7xl font-extrabold tracking-tight uppercase">BAROS DESIGN</h1>
+                <p class="mt-4 text-lg md:text-2xl font-light text-gray-300">TEMUKAN GAYA ANDA BERSAMA KAMI</p>
                 <a href="#catalog" class="mt-8 inline-block bg-white text-black px-8 py-3 font-semibold rounded-md hover:bg-gray-200">
                     Belanja Sekarang
                 </a>
@@ -113,7 +120,9 @@
                         <div class="relative">
                             <img src="https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?q=80&w=1887&auto=format&fit=crop" alt="Kaos Putih" class="w-full h-80 object-cover transform transition-transform duration-500">
                             <div class="absolute bottom-0 left-0 right-0 p-4">
-                                <button class="add-to-cart-btn w-full bg-white text-black py-2 font-bold rounded-md">Tambah ke Keranjang</button>
+                                <button class="add-to-cart-btn w-full bg-white text-black py-2 font-bold rounded-md" data-product-id="P001" data-product-name="Kaos Putih" data-price="75000">
+                                Tambah ke Keranjang
+                                </button>
                             </div>
                         </div>
                         <div class="p-4">
@@ -124,9 +133,9 @@
                     <!-- Product Card 2 -->
                     <div class="product-card bg-gray-800 rounded-lg overflow-hidden shadow-lg group text-left">
                         <div class="relative">
-                            <img src="bajualucard.jpg" alt="Baju king Alucard" class="w-full h-80 object-cover transform transition-transform duration-500">
+                            <img src="bajualucard.jpg" alt="Baju king Alucard" class="w-full h-80 object-cover transform transition-transform duration-500" onerror="this.onerror=null;this.src='https://placehold.co/600x800/3a3a3a/cccccc?text=Alucard';">
                              <div class="absolute bottom-0 left-0 right-0 p-4">
-                                <button class="add-to-cart-btn w-full bg-white text-black py-2 font-bold rounded-md">Tambah ke Keranjang</button>
+                                <button class="add-to-cart-btn w-full bg-white text-black py-2 font-bold rounded-md" data-product-id="P002" data-product-name="Baju king Alucard" data-price="100000">Tambah ke Keranjang</button>
                             </div>
                         </div>
                         <div class="p-4">
@@ -137,9 +146,9 @@
                     <!-- Product Card 3 -->
                     <div class="product-card bg-gray-800 rounded-lg overflow-hidden shadow-lg group text-left">
                         <div class="relative">
-                            <img src="kaoshitam.jpg" alt="Kaos hitam Polos" class="w-full h-80 object-cover transform transition-transform duration-500">
+                            <img src="kaoshitam.jpg" alt="Kaos hitam Polos" class="w-full h-80 object-cover transform transition-transform duration-500" onerror="this.onerror=null;this.src='https://placehold.co/600x800/3a3a3a/cccccc?text=Kaos+Hitam';">
                              <div class="absolute bottom-0 left-0 right-0 p-4">
-                                <button class="add-to-cart-btn w-full bg-white text-black py-2 font-bold rounded-md">Tambah ke Keranjang</button>
+                                <button class="add-to-cart-btn w-full bg-white text-black py-2 font-bold rounded-md" data-product-id="P003" data-product-name="Kaos hitam Polos" data-price="75000">Tambah ke Keranjang</button>
                             </div>
                         </div>
                         <div class="p-4">
@@ -150,9 +159,9 @@
                     <!-- Product Card 4 -->
                     <div class="product-card bg-gray-800 rounded-lg overflow-hidden shadow-lg group text-left">
                         <div class="relative">
-                            <img src="bajualok.jpg" alt="Alok rare" class="w-full h-80 object-cover transform transition-transform duration-500">
+                            <img src="bajualok.jpg" alt="Alok rare" class="w-full h-80 object-cover transform transition-transform duration-500" onerror="this.onerror=null;this.src='https://placehold.co/600x800/3a3a3a/cccccc?text=Alok';">
                              <div class="absolute bottom-0 left-0 right-0 p-4">
-                                <button class="add-to-cart-btn w-full bg-white text-black py-2 font-bold rounded-md">Tambah ke Keranjang</button>
+                                <button class="add-to-cart-btn w-full bg-white text-black py-2 font-bold rounded-md" data-product-id="P004" data-product-name="Kaos Alok RARE" data-price="300000">Tambah ke Keranjang</button>
                             </div>
                         </div>
                         <div class="p-4">
@@ -160,19 +169,19 @@
                             <p class="text-gray-400 mt-1">Rp 300.000</p>
                         </div>
                     </div>
-                    <!-- Product Card 5 -->
-                     <div class="product-card bg-gray-800 rounded-lg overflow-hidden shadow-lg group text-left">
-                        <div class="relative">
-                            <img src="bajuonic.jpg" alt="Kaos onic" class="w-full h-80 object-cover transform transition-transform duration-500">
-                             <div class="absolute bottom-0 left-0 right-0 p-4">
-                                <button class="add-to-cart-btn w-full bg-white text-black py-2 font-bold rounded-md">Tambah ke Keranjang</button>
-                            </div>
-                        </div>
-                        <div class="p-4">
-                            <h3 class="text-lg font-semibold text-white">T-shirt onic</h3>
-                            <p class="text-gray-400 mt-1">Rp 200.000</p>
-                        </div>
-                    </div>
+                     <!-- Product Card 5 -->
+                      <div class="product-card bg-gray-800 rounded-lg overflow-hidden shadow-lg group text-left">
+                         <div class="relative">
+                             <img src="bajuonic.jpg" alt="Kaos onic" class="w-full h-80 object-cover transform transition-transform duration-500" onerror="this.onerror=null;this.src='https://placehold.co/600x800/3a3a3a/cccccc?text=Onic';">
+                              <div class="absolute bottom-0 left-0 right-0 p-4">
+                                 <button class="add-to-cart-btn w-full bg-white text-black py-2 font-bold rounded-md" data-product-id="P005" data-product-name="T-shirt onic" data-price="200000">Tambah ke Keranjang</button>
+                             </div>
+                         </div>
+                         <div class="p-4">
+                             <h3 class="text-lg font-semibold text-white">T-shirt onic</h3>
+                             <p class="text-gray-400 mt-1">Rp 200.000</p>
+                         </div>
+                     </div>
                 </div>
             </div>
         </section>
@@ -228,21 +237,41 @@
                 });
             });
         });
-
-        // --- Simulasi Login Google ---
-        function handleLogin() {
-            // Ini adalah fungsi placeholder.
-            // Dalam aplikasi nyata, Anda akan mengintegrasikan Google Sign-In SDK di sini.
-            console.log('Fungsi login dengan Google dipanggil.');
-            alert('Simulasi Login dengan Akun Google berhasil!');
+        
+        // --- Script untuk menangani respons login Google ---
+        function handleCredentialResponse(response) {
+            console.log("Encoded JWT ID token: " + response.credential);
+            alert('Login berhasil! Lihat data di console (F12).');
         }
+        
+        // --- Script untuk Keranjang Belanja ---
+        let cart = JSON.parse(localStorage.getItem('shoppingCart')) || [];
 
-        const loginButton = document.getElementById('login-button');
-        const mobileLoginButton = document.getElementById('mobile-login-button');
+        const addToCartButtons = document.querySelectorAll('.add-to-cart-btn');
+        
+        addToCartButtons.forEach(button => {
+            button.addEventListener('click', (e) => {
+                const buttonElement = e.currentTarget;
+                const productId = buttonElement.dataset.productId;
+                const productName = buttonElement.dataset.productName;
+                const price = parseInt(buttonElement.dataset.price);
 
-        loginButton.addEventListener('click', handleLogin);
-        mobileLoginButton.addEventListener('click', handleLogin);
+                // Cek apakah produk sudah ada di keranjang
+                const existingProduct = cart.find(item => item.id === productId);
 
+                if (existingProduct) {
+                    existingProduct.quantity++;
+                } else {
+                    cart.push({ id: productId, name: productName, price: price, quantity: 1 });
+                }
+                
+                // Simpan ke localStorage
+                localStorage.setItem('shoppingCart', JSON.stringify(cart));
+
+                alert(`"${productName}" telah ditambahkan ke keranjang!`);
+                console.log(cart);
+            });
+        });
     </script>
 
 </body>
